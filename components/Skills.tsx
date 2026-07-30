@@ -4,21 +4,30 @@ import { motion } from "framer-motion";
 import { Code2, Globe, Brain, BarChart3, Cpu } from "lucide-react";
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { type: "spring" as any, stiffness: 100, damping: 20 } 
+  },
 };
 
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
   },
 };
 
 const pillVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.3 } },
+  hidden: { opacity: 0, scale: 0.9, y: 10 },
+  visible: { 
+    opacity: 1, 
+    scale: 1, 
+    y: 0,
+    transition: { type: "spring" as any, stiffness: 200, damping: 15 } 
+  },
 };
 
 const skillCategories = [
@@ -65,7 +74,7 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative py-24 sm:py-32 bg-slate-900/30">
+    <section id="skills" className="relative py-24 sm:py-32 bg-[#0a0a0a]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -75,10 +84,10 @@ export default function Skills() {
           variants={fadeInUp}
           className="mb-16"
         >
-          <p className="text-cyan-400 font-mono text-sm tracking-wider uppercase mb-2">
+          <p className="text-[#64748b] font-mono text-xs tracking-widest uppercase mb-3">
             // What I work with
           </p>
-          <h2 className="section-heading text-3xl sm:text-4xl font-bold text-white">
+          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
             Technical Skills
           </h2>
         </motion.div>
@@ -89,23 +98,20 @@ export default function Skills() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
           variants={staggerContainer}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
         >
           {skillCategories.map((category) => (
             <motion.div
               key={category.title}
               variants={fadeInUp}
-              whileHover={{
-                borderColor: "rgba(34, 211, 238, 0.3)",
-                boxShadow: "0 0 20px rgba(34, 211, 238, 0.06)",
-              }}
-              className={`p-6 rounded-2xl bg-slate-900/60 border border-slate-800 transition-all duration-300 ${category.span}`}
+              whileHover={{ borderColor: "#444444" }}
+              className={`p-6 sm:p-8 rounded-2xl bg-[#111111] border border-[#222222] transition-colors duration-500 ${category.span}`}
             >
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center">
-                  <category.icon className="w-5 h-5 text-cyan-400" />
+              <div className="flex items-center gap-4 mb-6 pb-6 border-b border-[#222222]">
+                <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] border border-[#333333] flex items-center justify-center">
+                  <category.icon className="w-5 h-5 text-[#fafafa]" />
                 </div>
-                <h3 className="font-semibold text-white text-lg">
+                <h3 className="font-bold text-white text-lg tracking-tight">
                   {category.title}
                 </h3>
               </div>
@@ -115,19 +121,19 @@ export default function Skills() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="flex flex-wrap gap-2"
+                className="flex flex-wrap gap-2.5"
               >
                 {category.skills.map((skill) => (
                   <motion.span
                     key={skill}
                     variants={pillVariants}
                     whileHover={{
-                      borderColor: "#22d3ee",
-                      color: "#22d3ee",
-                      backgroundColor: "rgba(34, 211, 238, 0.08)",
-                      y: -2,
+                      backgroundColor: "#fafafa",
+                      color: "#000000",
+                      borderColor: "#fafafa",
+                      scale: 1.05,
                     }}
-                    className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-800 text-slate-300 border border-slate-700 cursor-default transition-colors"
+                    className="px-3.5 py-1.5 rounded-md text-xs font-medium bg-[#1a1a1a] text-[#94a3b8] border border-[#333333] transition-colors duration-300"
                   >
                     {skill}
                   </motion.span>

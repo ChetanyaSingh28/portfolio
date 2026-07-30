@@ -3,9 +3,21 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+const ladderVariant = {
+  hidden: { opacity: 0, y: -30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { type: "spring" as any, stiffness: 100, damping: 20 } 
+  },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+  },
 };
 
 const contactInfo = [
@@ -38,82 +50,70 @@ export default function About() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          variants={fadeInUp}
+          variants={ladderVariant}
           className="mb-16"
         >
-          <p className="text-cyan-400 font-mono text-sm tracking-wider uppercase mb-2">
+          <p className="text-[#64748b] font-mono text-xs tracking-widest uppercase mb-3">
             // Get to know me
           </p>
-          <h2 className="section-heading text-3xl sm:text-4xl font-bold text-white">
+          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
             About Me
           </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-5 gap-12 items-start">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={staggerContainer}
+          className="grid lg:grid-cols-5 gap-12 items-start"
+        >
           {/* Bio */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={fadeInUp}
-            className="lg:col-span-3"
-          >
-            <div className="border-l-2 border-cyan-500/40 pl-6">
-              <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-                B.Tech CSE-AI/ML student with hands-on experience engineering
-                end-to-end artificial intelligence pipelines and scalable
-                full-stack software systems. Passionate about applying supervised
-                learning, probabilistic modeling, and data-driven software
-                architecture to solve complex real-world problems. Eager to
-                deepen expertise under industry leaders and contribute to
-                impactful AI and software solutions.
-              </p>
+          <div className="lg:col-span-3">
+            <div className="border-l border-[#333333] pl-6 py-2 text-[#94a3b8] text-base sm:text-lg leading-relaxed font-light space-y-4">
+              <motion.p variants={ladderVariant}>
+                B.Tech CSE-AI/ML student with hands-on experience engineering end-to-end artificial intelligence pipelines and scalable full-stack software systems.
+              </motion.p>
+              <motion.p variants={ladderVariant}>
+                Passionate about applying supervised learning, probabilistic modeling, and data-driven software architecture to solve complex real-world problems.
+              </motion.p>
+              <motion.p variants={ladderVariant}>
+                Eager to deepen expertise under industry leaders and contribute to impactful AI and software solutions.
+              </motion.p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Contact Grid */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-              },
-            }}
-            className="lg:col-span-2 space-y-4"
-          >
+          <div className="lg:col-span-2 space-y-4">
             {contactInfo.map((contact) => (
               <motion.div
                 key={contact.label}
-                variants={fadeInUp}
-                whileHover={{ y: -3, borderColor: "rgba(34, 211, 238, 0.4)" }}
-                className="flex items-center gap-4 p-4 rounded-xl bg-slate-900/50 border border-slate-800 transition-colors"
+                variants={ladderVariant}
+                whileHover={{ x: 5, backgroundColor: "#111111" }}
+                className="flex items-center gap-4 p-5 rounded-xl border border-[#222222] bg-[#0a0a0a] transition-colors"
               >
-                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center">
-                  <contact.icon className="w-5 h-5 text-cyan-400" />
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#1a1a1a] border border-[#333333] flex items-center justify-center">
+                  <contact.icon className="w-4 h-4 text-[#fafafa]" />
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 uppercase tracking-wider font-medium">
+                  <p className="text-[10px] text-[#64748b] uppercase tracking-widest font-mono mb-1">
                     {contact.label}
                   </p>
                   {contact.href ? (
                     <a
                       href={contact.href}
-                      className="text-sm text-slate-200 hover:text-cyan-400 transition-colors"
+                      className="text-sm text-[#e2e8f0] hover:text-white transition-colors"
                     >
                       {contact.value}
                     </a>
                   ) : (
-                    <p className="text-sm text-slate-200">{contact.value}</p>
+                    <p className="text-sm text-[#e2e8f0]">{contact.value}</p>
                   )}
                 </div>
               </motion.div>
             ))}
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
