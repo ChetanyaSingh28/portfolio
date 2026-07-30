@@ -15,7 +15,7 @@ This project is a [Next.js](https://nextjs.org/) application bootstrapped with [
 I focus on building robust applications and exploring various facets of software development. My technical background includes:
 
 * **Languages:** Python, Java, C, SQL, and TypeScript/JavaScript.
-* **Featured Projects:** Currently developing a full-scale Hostel/PG Management SaaS system. 
+* **Featured Projects:** Currently developed a full-scale Hostel/PG Management SaaS system. 
 
 ## 🛠️ Getting Started
 
